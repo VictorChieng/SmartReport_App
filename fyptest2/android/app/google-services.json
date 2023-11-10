@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769752664985",
+    "project_id": "smartreport-272fa",
+    "storage_bucket": "smartreport-272fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769752664985:android:5bba5d276010d459b5e108",
+        "android_client_info": {
+          "package_name": "com.example.fyptest1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3CUq6DRQTMFQw_CSU-P2PoYFr8UX4a8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
