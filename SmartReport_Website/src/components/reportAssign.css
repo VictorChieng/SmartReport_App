@@ -1,0 +1,41 @@
+/* ReportAssign.css */
+
+/* Container styles */
+.report-assign-container {
+    display: flex;
+  }
+  
+  /* Left section styles */
+  .left-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  /* Report details styles */
+  .report-details {
+    margin-bottom: 20px;
+  }
+  
+  /* Images section styles */
+  .images-section {
+    margin-bottom: 20px;
+  }
+  
+  /* Image carousel styles */
+  .carousel {
+    max-width: 300px; /* Adjust as needed */
+  }
+  
+  /* Right section styles */
+  .right-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  /* Comments section styles */
+  .comments-section {
+    margin-bottom: 20px;
+  }
+  
+
+  iframe#webpack-dev-server-client-overlay{display:none!important}

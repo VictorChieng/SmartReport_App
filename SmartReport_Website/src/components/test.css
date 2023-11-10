@@ -1,0 +1,22 @@
+/* Style for the Left Container (Report Details) */
+.left-container {
+    background-color: blue;
+    width: 33.33%; /* Adjust the width to 33.33% for a one-third width */
+    /* Add any other CSS styles specific to the left container here */
+  }
+  
+  /* Style for the Center Container (Images) */
+  .center-container {
+    background-color: blue;
+    width: 33.33%; /* Adjust the width to 33.33% for a one-third width */
+    /* Add any other CSS styles specific to the center container here */
+  }
+  
+  /* Style for the Right Container (Add Comments and Assign Agent) */
+  .right-container {
+    background-color: blue;
+    width: 33.33%; /* Adjust the width to 33.33% for a one-third width */
+    /* Add any other CSS styles specific to the right container here */
+  }
+  
+  iframe#webpack-dev-server-client-overlay{display:none!important}
