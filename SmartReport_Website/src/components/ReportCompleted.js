@@ -379,36 +379,7 @@ function ReportCompleted() {
 
                 {/* Right Section for Adding Comments and Assigning Agents */}
                 <div style={{ flex: 1, padding: '10px', overflow: 'auto', borderRadius: '10px', border: '2px solid black', margin: '5px', backgroundColor: '#BFBAF0', height: '680px' }}>
-                    {/* <h2>Add Instruction to agent</h2>
-                    <ReactQuill
-                        style={{ backgroundColor: 'white', border: '2px solid black' }}
-                        value={commentContent}
-                        onChange={(value) => setCommentContent(value)}
-                        onFocus={() => {
-                            if (commentContent === '<p>Start adding comments here...</p>') {
-                                setCommentContent('<p></p>'); // Clear text on focus
-                            }
-                        }}
-                        onBlur={() => {
-                            if (commentContent === '<p></p>' || commentContent === '<p><br></p>') {
-                                setCommentContent('<p>Start adding comments here...</p>'); // Restore text on blur if content is empty
-                            }
-                        }}
-                    />
-                    <button
-                        onClick={handleSaveComment}
-                        style={{
-                            borderRadius: '10px',
-                            padding: '10px 20px',
-                            backgroundColor: '#FF705A',
-                            border: 'none',
-                            color: 'white',
-                            cursor: 'pointer',
-                            marginTop: '10px',
-                        }}
-                    >
-                        Save Instruction
-                    </button> */}
+
                     <div style={{ marginTop: '10px' }}>
                         <h2>Instruction Display</h2>
                         <div style={{ border: '2px solid black', padding: '5px', overflowY: 'auto', overflowX: 'hidden', backgroundColor: 'white', height: '150px' }}>
