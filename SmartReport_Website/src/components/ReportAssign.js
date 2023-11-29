@@ -11,7 +11,7 @@ import firebase from 'firebase'; // Import Firebase correctly
 import axios from "axios"; // Import Axios
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -27,6 +27,8 @@ function ReportAssign() {
   const [userId, setUserId] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [updatedSelectedAgents, setUpdatedSelectedAgents] = useState([]); // Add this line
+  const history = useHistory();
+
 
 
   async function fetchUserIdForReport(reportId) {
@@ -337,6 +339,66 @@ function ReportAssign() {
     return tmp.textContent || tmp.innerText || "";
   }
 
+
+
+  async function handleRejectRequest() {
+  
+    try {
+      const docRef = firestore().collection("report_submissions").doc(reportId);
+      const doc = await docRef.get();
+  
+      if (doc.exists) {
+        const data = doc.data();
+  
+        if (data) {
+          // Prompt a confirmation dialog
+          confirmAlert({
+            title: 'Confirm Reject',
+            message: 'Are you sure you want to reject this request?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: async () => {
+                  try {
+                    // Prepare data to send to the server
+                    const dataToSend = {
+                      reportId,
+                      userId,
+                    };
+  
+                    // Make a POST request to an external server
+                    const response = await axios.post('http://localhost:3001/reject-report', dataToSend);
+                    console.log('Rejection response:', response.data);
+  
+                    // Display a success message or perform additional actions if needed
+  
+                    // Navigate back to http://localhost:3000/ReportManagement
+                    history.push('/ReportManagement');
+                  } catch (postError) {
+                    console.error('Error sending POST request:', postError);
+                    // Handle the error appropriately, such as showing an error message to the user
+                  }
+                },
+              },
+              {
+                label: 'No',
+                onClick: () => {
+                  // Handle the case where the user chooses not to reject
+                },
+              },
+            ],
+          });
+        } else {
+          console.error('Invalid data in Firestore document. userEmail is missing.');
+        }
+      } else {
+        console.error('Report document with ID', reportId, 'does not exist.');
+      }
+    } catch (error) {
+      console.error('Error rejecting report:', error);
+      // Handle the error appropriately
+    }
+  }
   const filteredSuggestedAgents = suggestedAgents.filter(agent => agent.name.toLowerCase().includes(searchInput.toLowerCase()));
 
   return (
@@ -470,11 +532,29 @@ function ReportAssign() {
           >
             Assign Report to In Progress
           </button>
+
+          <button
+            onClick={handleRejectRequest}
+            style={{
+              borderRadius: '10px',
+              padding: '10px 20px',
+              backgroundColor: '#FF0000',
+              border: 'none',
+              color: 'white',
+              cursor: 'pointer',
+              marginTop: '20px',
+              marginRight: '10px', // Add margin for spacing
+            }}
+          >
+            Reject Request
+          </button>
         </div>
       </div>
     </div>
   );
 }
+
+
 
 export default ReportAssign;
 

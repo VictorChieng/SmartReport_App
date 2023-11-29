@@ -317,6 +317,51 @@ app.post('/removeUser', async (req, res) => {
   }
 });
 
+app.post('/reject-report', async (req, res) => {
+  try {
+    const { reportId, userId } = req.body;
+
+    // Fetch the user's email based on the provided userId from the "users" collection
+    const userSnapshot = await admin.firestore().collection('users').doc(userId).get();
+    
+    // Check if the user document exists and contains the email field
+    if (userSnapshot.exists) {
+      const userEmail = userSnapshot.data().email;
+
+      // Send rejection email
+      console.log('Recipient email:', userEmail);
+
+      const mailOptions = {
+        from: 'noreply.smartreport@gmail.com',
+        to: userEmail,
+        subject: 'Report Rejection',
+        text: `Dear User,\n\nWe regret to inform you that your report with ID ${reportId} has been rejected due to invalid details. If you want to resubmit a new report, please do so with valid details. Thank you.\n\nSincerely,\nSmartReport Management`,
+      };
+
+      await transporter.sendMail(mailOptions);
+
+      console.log(`Rejected report ${reportId} and sent rejection email to ${userEmail}`);
+
+      // Delete the document from the "report_submissions" collection
+      const reportRef = admin.firestore().collection('report_submissions').doc(reportId);
+      await reportRef.delete();
+
+      console.log(`Deleted report ${reportId} from the "report_submissions" collection`);
+
+      res.json({ success: true });
+    } else {
+      // Handle the case where the user document with the given userId does not exist
+      console.error(`User document with userId ${userId} does not exist.`);
+      res.status(404).json({ success: false, error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error rejecting report:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
+
+
 ////
 ////////////////////////////
 const PORT = process.env.PORT || 3001;
