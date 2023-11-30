@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:photo_view/photo_view.dart';
 
-
-
 class InProgressDetailsPage extends StatefulWidget {
   final Map<String, dynamic> data;
 

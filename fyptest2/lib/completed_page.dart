@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 
 class CompletedPage extends StatefulWidget {
   final String userId;
-
   const CompletedPage({Key? key, required this.userId}) : super(key: key);
 
   @override
