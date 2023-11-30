@@ -179,7 +179,7 @@ function ReportRated() {
                     <h2>Report Details</h2>
                     <div>
                         <p>Report ID: {reportDetails.reportId}</p>
-                        <p>Decription: {reportDetails.desc}</p>
+                        <p>Description: {reportDetails.desc}</p>
                         <p>Title: {reportDetails.title}</p>
                         <p>Category: {reportDetails.category}</p>
                         <p>Location: {reportDetails.location}</p>

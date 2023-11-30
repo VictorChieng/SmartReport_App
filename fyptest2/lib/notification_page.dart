@@ -21,7 +21,7 @@ class NotificationModel {
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationModel> notifications = [];
 
-  // Inside your _NotificationPageState class
+  // Inside _NotificationPageState class
   void handleReportSubmission() {
     // Perform report submission logic here
 

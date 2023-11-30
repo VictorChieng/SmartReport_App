@@ -52,7 +52,7 @@ class ReportViewModel extends ChangeNotifier {
         return;
       }
 
-      final url = Uri.parse('http://192.168.100.8:3001/submitReport');
+      final url = Uri.parse('http://192.168.100.8:3001/submitReport'); //192.168.100.8, 192.168.218.106
 
       try {
         final response = await http.post(

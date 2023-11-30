@@ -61,9 +61,9 @@ class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors
-                                  .grey, // You can set the profile picture here
+                                  .grey, //set the profile picture here
                             ),
-                            // You can replace the color with an actual profile picture
+                            // Replace the color with an actual profile picture
                           ),
                           SizedBox(width: 16),
                           Text(

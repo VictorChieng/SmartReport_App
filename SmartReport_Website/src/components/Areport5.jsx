@@ -6,7 +6,7 @@ import "firebase/firestore";
 
 import "./report.css";
 import { Link } from "react-router-dom";
-
+  
 function AReport5() {
   const [reportSubmissions, setReportSubmissions] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

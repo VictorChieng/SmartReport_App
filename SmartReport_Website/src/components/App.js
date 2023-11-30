@@ -25,13 +25,6 @@ import ReportRated from "./ReportRated"
 import UserDetails from "./UserDetails"
 import Profile from "./Profile"
 
-
-
-
-
-
-
-
 function App() {
   return (
     <Router>
@@ -49,14 +42,12 @@ function App() {
           <PrivateRoute exact path="/UserManagement" component={UserManagement} />
           <PrivateRoute exact path="/Profile" component={Profile} />
 
-
           <PrivateRoute path="/report2/:reportId" component={ReportAssign} />
           <PrivateRoute path="/report3/:reportId" component={ReportInProgress} />
           <PrivateRoute path="/report4/:reportId" component={ReportCompleted} />
           <PrivateRoute path="/report5/:reportId" component={AReportAssign} />
           <PrivateRoute path="/report6/:reportId" component={ReportRated} />
           <PrivateRoute path="/UserDetails/:userId" component={UserDetails} />
-
 
 
           {/* Other routes inside the Container */}
@@ -80,5 +71,4 @@ function App() {
     </Router>
   )
 }
-
 export default App

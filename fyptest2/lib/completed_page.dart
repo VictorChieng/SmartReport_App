@@ -39,19 +39,21 @@ class _CompletedPageState extends State<CompletedPage> {
               .where('userId', isEqualTo: widget.userId)
               .where('reportStatus', isEqualTo: "Completed")
               .snapshots(),
-          builder: (context, snapshot) {
+          builder: (context, snapshot) {// Display loading indicator if data is not available yet
+
             if (!snapshot.hasData) {
               return CircularProgressIndicator();
             }
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              // Display a message if there are no completed reports
               return Center(
                 child: Text('No subjects available! ${widget.userId}'),
               );
             }
-
+            // Sort the report documents based on date and time
             final reportDocuments = snapshot.data!.docs;
 
-            reportDocuments.sort((a, b) {
+            reportDocuments.sort((a, b) {// Sorting logic based on date and time
               final aDate = a['date'];
               final aTime = a['time'];
               final bDate = b['date'];
@@ -84,13 +86,9 @@ class _CompletedPageState extends State<CompletedPage> {
               return bDateTime.compareTo(aDateTime);
             });
 
-            // final pendingReportDocuments = reportDocuments.where((document) {
-            //   return document['reportStatus'] == 'Pending';
-            // }).toList();
-
             return ListView.builder(
               itemCount: reportDocuments.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (context, index) {// Extract relevant data from the report document
                 final document = reportDocuments[index].data();
                 final title = document['title'];
                 final category = document['category'];
@@ -99,10 +97,11 @@ class _CompletedPageState extends State<CompletedPage> {
                 final time = document['timeCompleted'];
                 final imageUrl = document['imageUrls'][0];
 
-
+                // Parse date and time information
                 final dateTimeFormatter = DateFormat('yyyy-MM-dd h:mm a');
                 final reportDateTime = dateTimeFormatter.parse('$date $time');
 
+                //UI design
                 return Container(
                   width: 390,
                   height: 250.6,

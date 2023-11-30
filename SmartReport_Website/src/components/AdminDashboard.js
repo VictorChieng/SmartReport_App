@@ -3,23 +3,28 @@ import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
+// AdminDashboard component for displaying admin-specific functionalities
 export default function AdminDashboard() {
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
-  const history = useHistory()
+  const { currentUser, logout } = useAuth()   // Authentication functions and current user data from AuthContext
+  const history = useHistory()   // History hook for programmatic navigation
 
+  // Function to handle user logout
   async function handleLogout() {
     setError("")
 
     try {
+      // Attempt to log out the user
       await logout()
+      // Redirect to the home page after successful logout
       history.push("/")
     } catch {
+      // Set an error message if logout fails
       setError("Failed to log out")
     }
   }
 
-  
+  // Render the AdminDashboard UI
   return (
     <div className="container">
       <Card style={{ backgroundColor: '#433E7A', color: 'white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', borderRadius: '15px', padding: '20px' }}>

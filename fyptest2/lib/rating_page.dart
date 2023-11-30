@@ -51,7 +51,7 @@ class _RatingPageState extends State<RatingPage> {
       print("Rating: $rating");
 
       final url = Uri.parse(
-          'http://192.168.100.8:3001/submitRating'); //192.168.100.8, 192.168.114.106
+          'http://192.168.1:3001/submitRating'); //192.168.100.8, 192.168.114.106
 
       try {
         final response = await http.post(

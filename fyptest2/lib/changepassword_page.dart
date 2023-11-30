@@ -10,21 +10,22 @@ class ChangePasswordPage extends StatefulWidget {
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
+class _ChangePasswordPageState extends State<ChangePasswordPage> {//Controllers for handling user input
   final TextEditingController currentPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmNewPasswordController = TextEditingController();
 
-  Future<void> changePassword() async {
-    User? user = FirebaseAuth.instance.currentUser;
+  Future<void> changePassword() async {//Method to handle password change logic
+    User? user = FirebaseAuth.instance.currentUser;//Get the current user from Firebase Authentication
 
     if (user != null) {
-      try {
+      try {// Extract user information and entered passwords
         var email = user.email!;
         var currentPassword = currentPasswordController.text;
         var newPass = newPasswordController.text;
         var confirmNewPass = confirmNewPasswordController.text;
 
+        // Validate the new password length
         if (newPass.length < 6) {
           showDialog(
             context: context,
@@ -46,6 +47,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           return;
         }
 
+        // Validate that new password and confirm password match
         if (newPass != confirmNewPass) {
           showDialog(
             context: context,
@@ -66,11 +68,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           );
           return;
         }
-
+        // Reauthenticate user with current credentials before changing password
         var credential = EmailAuthProvider.credential(email: email, password: currentPassword);
         await user.reauthenticateWithCredential(credential);
+        // Update user password with the new one
         await user.updatePassword(newPass);
 
+        // Display success dialog
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -90,8 +94,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           },
         );
       } catch (e) {
-        showDialog(
-          context: context,
+        showDialog(// Handle password change failure and display an error dialog
+        context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text("Password Error"),
@@ -111,7 +115,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       }
     }
   }
-
+//Widget for building the UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -147,7 +147,7 @@ class _MyReportPageState extends State<MyReportPage> {
                 final date = document['date'];
                 final time = document['time'];
                 final imageUrl = document['imageUrls']
-                    [0]; // Assuming the first image URL is what you want
+                    [0]; //  the first image URL
 
                 final dateTimeFormatter = DateFormat('yyyy-MM-dd h:mm a');
                 final reportDateTime = dateTimeFormatter.parse('$date $time');
@@ -164,7 +164,6 @@ class _MyReportPageState extends State<MyReportPage> {
                                   ReportDetailsPage(data: document,)));
                     },
                     child: Card(
-                      // Your existing card code...
                       child: Stack(
                         children: [
                           Padding(
@@ -229,7 +228,6 @@ class _MyReportPageState extends State<MyReportPage> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              // You can add an image upload widget here
                             ),
                           ),
                         ],

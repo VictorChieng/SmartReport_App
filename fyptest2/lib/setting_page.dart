@@ -18,7 +18,7 @@ void LogOut(BuildContext context) async {
   Navigator.pop(context);
   Navigator.pop(context);
 }
-
+// State class for the SettingPagex
 class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _SettingPageState extends State<SettingPage> {
       ),
     );
   }
-
+  // Widget to build individual setting items
   Widget buildSettingItem(BuildContext context, String text, Widget nextPage) {
     return GestureDetector(
       onTap: () {

@@ -83,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     )
                   : CircleAvatar(
                       radius: 50,
-                      // You can provide a default placeholder image here
+                      // provide a default placeholder image here
                       backgroundColor: Colors.grey,
                       child: Icon(Icons.person, size: 60, color: Colors.white),
                     ),
@@ -95,8 +95,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ImageHandler(userId: widget.userId).selectAndUploadImage();
                   },
                   child: Container(
-                    width: 30, // Adjust the width to your preference
-                    height: 30, // Adjust the height to your preference
+                    width: 30, // Adjust the width to preference
+                    height: 30, // Adjust the height to preference
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.blue,
@@ -123,8 +123,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         Divider(
-          color: Colors.grey, // You can customize the color of the line
-          thickness: 2, // You can adjust the thickness of the line
+          color: Colors.grey, // To customize the color of the line
+          thickness: 2, // Adjust the thickness of the line
         ),
       ],
     );

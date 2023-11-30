@@ -8,22 +8,27 @@ import logo from "./logo.png";
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
-  const [error, setError] = useState("");
+  const { login } = useAuth();  // Authentication functions from AuthContext
+  const [error, setError] = useState("");  // State variables for error handling and loading state
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
-  const db = firebase.firestore();
+  const history = useHistory();  // Navigation history hook
+  const db = firebase.firestore();   // Firestore database reference
 
+
+  // Function to check user role and redirect based on the role
   const checkUserRoleAndRedirect = useCallback(async (user) => {
     try {
+      // Fetch user data from Firestore
       const userDoc = await db.collection("users").doc(user.uid).get();
       const userData = userDoc.data();
 
+      // Check if user data and role exist
       if (userData && userData.role) {
         const role = userData.role;
 
         console.log(`User's role: ${role}`);
 
+        // Redirect based on user role
         switch (role) {
           case "admin":
             history.push("/AdminDashboard");
@@ -43,37 +48,46 @@ export default function Login() {
     }
   }, [db, history]);
 
+  // Effect hook to listen to changes in authentication state
   useEffect(() => {
+    // Set up an authentication state change listener
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        // If a user is authenticated, check their role and redirect
         checkUserRoleAndRedirect(user);
       }
     });
 
+    // Cleanup function to unsubscribe from the authentication state listener
     return () => unsubscribe();
   }, [checkUserRoleAndRedirect]);
 
+  // Function to handle form submission
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
+      // Reset error and set loading state
       setError("");
       setLoading(true);
+      // Attempt to log in the user
       const userCredential = await login(
         emailRef.current.value,
         passwordRef.current.value
       );
       const user = userCredential.user;
-
+      // Check user role and redirect
       checkUserRoleAndRedirect(user);
     } catch (error) {
       console.error("Login error:", error.message);
       setError("Failed to log in. Please check your credentials.");
     } finally {
+      // Reset loading state
       setLoading(false);
     }
   }
 
+  // Render the login form
   return (
     <>
       <Card style={{ backgroundColor: '#433E7A', color: 'white' }}>

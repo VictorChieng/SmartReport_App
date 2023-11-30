@@ -151,7 +151,7 @@ class _ReportPageState extends State<ReportPage> {
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).pop(true);
-              // Navigate back to your home page
+              // Navigate back to home page
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -223,7 +223,7 @@ class _ReportPageState extends State<ReportPage> {
         'Hall',
         'Canteen',
         'Library',
-        'Furniture',
+        'Lobby',
       ]
           .where((location) =>
               location.toLowerCase().contains(query.toLowerCase()))
@@ -237,6 +237,7 @@ class _ReportPageState extends State<ReportPage> {
         'Electrical',
         'Water',
         'Structure',
+        'Furniture',
       ]
           .where((category) =>
               category.toLowerCase().contains(query.toLowerCase()))

@@ -12,12 +12,12 @@ admin.initializeApp({
   databaseURL: 'https://console.firebase.google.com/u/0/project/smartreport-272fa/database/smartreport-272fa-default-rtdb/data/~2F', // Replace with your Firebase database URL
 });
 
-// Configure Nodemailer with your Gmail app-specific password
+// Configure Nodemailer with Gmail app-specific password
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'noreply.smartreport@gmail.com', // your Gmail email
-    pass: 'kuzd bbka jpba ygmg', // your Gmail app-specific password
+    user: 'noreply.smartreport@gmail.com', // Gmail email
+    pass: 'kuzd bbka jpba ygmg', // Gmail app-specific password
   },
 });
 
@@ -34,6 +34,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
+//admin create new user
 app.post('/createUser', async (req, res) => {
   try {
     const { email, password, name, phoneNumber, department, role } = req.body;

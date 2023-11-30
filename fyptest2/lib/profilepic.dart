@@ -16,10 +16,6 @@ class ImageHandler {
       String imagePath = pickedFile.path;
       File imageFile = File(imagePath);
 
-      // You can display the selected image for confirmation here
-
-      // Implement your confirmation logic here
-
       // Once confirmed, upload the image to Firebase Storage
       Reference storageReference = FirebaseStorage.instance
           .ref()
