@@ -23,6 +23,7 @@ class _RatingPageState extends State<RatingPage> {
   final CollectionReference reportSubmissionsCollection =
   FirebaseFirestore.instance.collection('report_submissions');
 
+  // Method to submit the rating and handle the flow based on the rating value
   Future<void> submitRating() async {
     if (rating == 0) {
       // Show an alert dialog if the rating is null
@@ -43,17 +44,20 @@ class _RatingPageState extends State<RatingPage> {
         },
       );
     } else {
+      // Construct the data to update in Firestore
       final Map<String, dynamic> dataToUpdate = {
         'serviceFeedback': feedback,
         'Rating': rating,
         'reportStatus': 'Rated',
       };
+      // Print the rating for debugging
       print("Rating: $rating");
 
-      final url = Uri.parse(
-          'http://192.168.1:3001/submitRating'); //192.168.100.8, 192.168.114.106
+      // URL for external server to handle additional rating submission logic
+      final url = Uri.parse('http://192.168.218.106:3001/submitRating'); //192.168.100.8, 192.168.114.106
 
       try {
+        // Send a POST request to the external server with report-related data
         final response = await http.post(
           url,
           headers: {'Content-Type': 'application/json'},
@@ -64,7 +68,7 @@ class _RatingPageState extends State<RatingPage> {
             // Add other necessary report data here
           }),
         );
-
+        // Check if the response status code is successful (200)
         if (response.statusCode == 200) {
           // Successful response
           print("Rating submitted successfully.");
@@ -78,6 +82,7 @@ class _RatingPageState extends State<RatingPage> {
       }
 
       try {
+        // Update the document in Firestore with the new rating data
         await reportSubmissionsCollection
             .doc(widget.data['reportId'])
             .set(dataToUpdate, SetOptions(merge: true));
@@ -86,6 +91,7 @@ class _RatingPageState extends State<RatingPage> {
         print("Error updating document: $e");
       }
 
+      // Show different dialogs based on the submitted rating
       if (rating >= 3.0) {
         showDialog(
           context: context,

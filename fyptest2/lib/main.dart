@@ -7,14 +7,18 @@ import 'package:fyptest1/report_page.dart';
 import 'package:fyptest1/reset_page_view.dart';
 import 'package:fyptest1/setting_page.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
-
 import 'home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+// Create a global key for the navigator to be accessed across the application
 final navigatorKey = GlobalKey<NavigatorState>();
 
+// Entry point for the application
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase with the app configuration options
   await Firebase.initializeApp(
     options: FirebaseOptions(
       apiKey: 'AIzaSyB3CUq6DRQTMFQw_CSU-P2PoYFr8UX4a8A',
@@ -27,23 +31,26 @@ void main() async {
     ),
 
   );
+
+  // Run the SmartReport application
   runApp(SmartReport());
 }
 
-
+// SmartReport application widget
 class SmartReport extends StatelessWidget {
   const SmartReport({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color.fromARGB(255, 225, 229, 130),
+      // Set the global navigator key for navigation access
+    navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,// Disable the debug banner
+      theme: ThemeData(// Define the application theme
+      primaryColor: Color.fromARGB(255, 225, 229, 130),
       ),
-      initialRoute: '/login',
-      onGenerateRoute: (settings) {
+      initialRoute: '/login',// Set the initial route for the application
+      onGenerateRoute: (settings) {// Define route generation logic
         if (settings.name == '/login') {
           return MaterialPageRoute(
             builder: (context) => LoginPageView(),
@@ -52,6 +59,7 @@ class SmartReport extends StatelessWidget {
         }
         return null;
       },
+      // Define named routes for the application
       routes: {
         '/home': (context) => HomePage(title: 'Home', userId: '',),
         '/report': (context) => ReportPage(userId: '',),

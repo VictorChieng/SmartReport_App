@@ -22,13 +22,14 @@ class _ProfilePageState extends State<ProfilePage> {
   String? email;
   String? department;
   String? userName;
-  String? userProfileImageUrl; // Add user profile image URL here
+  String? userProfileImageUrl; //  user profile image URL
 
   @override
   void initState() {
     super.initState();
-    _fetchUserData();
+    _fetchUserData();// Fetch user data when the widget initializes
   }
+  // Fetch user data from Firestore
   Future<void> _fetchUserData() async {
     try {
       DocumentSnapshot userSnapshot =
@@ -47,6 +48,8 @@ class _ProfilePageState extends State<ProfilePage> {
       print('Error fetching user data: $e');
     }
   }
+
+  // Build user details as a column
   Widget _buildUserDetail(String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,6 +71,8 @@ class _ProfilePageState extends State<ProfilePage> {
       ],
     );
   }
+
+  // Build user profile header with profile picture
   Widget _buildProfileHeader() {
     return Column(
       children: [
@@ -130,6 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  // Build clickable card for navigation
   Widget _buildClickableCard(
       BuildContext context, IconData icon, String text, Widget pageToNavigate) {
     return GestureDetector(
@@ -166,6 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  // Handle the user pressing the back button
   Future<bool> _onWillPop() async {
     return showDialog(
       context: context,

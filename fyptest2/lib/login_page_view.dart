@@ -9,10 +9,10 @@ class LoginPageView extends StatefulWidget {
 }
 
 class _LoginPageViewState extends State<LoginPageView> {
+  // Create an instance of LoginViewModel to manage login-related functionality
   final LoginViewModel viewModel = LoginViewModel();
-
+  // Controllers for handling user input in email and password fields
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
 
   @override

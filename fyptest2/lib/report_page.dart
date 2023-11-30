@@ -10,9 +10,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:math';
 
+// StatefulWidget for the Report Page
 class ReportPage extends StatefulWidget {
   final String userId;
-
+  // Constructor to receive the user ID
   const ReportPage({Key? key, required this.userId}) : super(key: key);
 
   @override
@@ -20,21 +21,24 @@ class ReportPage extends StatefulWidget {
 }
 
 class _ReportPageState extends State<ReportPage> {
+  // Variables to handle selected images and image picker
   List<File> selectedImages = [];
   final picker = ImagePicker();
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
+  // ViewModel for the report
   late ReportViewModel _reportViewModel;
+
   @override
   void initState() {
     // Initializes the viewModel variable
     super.initState();
     _reportViewModel = ReportViewModel();
   }
-
+  // Default emergency status is "No" when the toggle is off
   String emergencyStatus = "No"; // Initialize as "No" when the toggle is off
 
-//images
+  // Function to upload an image to Firebase Storage
   Future<String?> uploadImageToFirebase(File imageFile) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -45,13 +49,14 @@ class _ReportPageState extends State<ReportPage> {
       final String imageUrl = await reference.getDownloadURL();
 
       return imageUrl; // Return the image URL
-      // Do something with the imageUrl, such as storing it in a database or displaying it
+      // Do something with the imageUrl,
       print('Image URL: $imageUrl');
     } catch (e) {
       print('Error uploading image: $e');
     }
   }
 
+  // Function to get images from the device's gallery
   Future<void> getImages() async {
     final pickedFiles = await picker.pickMultiImage(
       imageQuality: 100,
@@ -74,12 +79,14 @@ class _ReportPageState extends State<ReportPage> {
     setState(() {});
   }
 
+  // Function to remove an image at a specific index
   void removeImage(int index) {
     setState(() {
       selectedImages.removeAt(index);
     });
   }
 
+  // Function to submit images to Firebase and create a report
   void submitImagesToFirebase() async {
     // Check for missing fields
     if (selectedDate == null ||
@@ -136,7 +143,7 @@ class _ReportPageState extends State<ReportPage> {
     }
   }
 
-  // images
+  // Function to confirm exiting the app
   Future<bool> _onWillPop() async {
     final shouldExit = await showDialog(
       context: context,
@@ -170,8 +177,9 @@ class _ReportPageState extends State<ReportPage> {
     return shouldExit ?? false;
   }
 
-  int _selectedIndex = 1; // Add this variable to track the selected tab
+  int _selectedIndex = 1; // variable to track the selected tab
 
+  // Function to handle bottom navigation item tap
   void _onItemTapped(int index) {
     // Handle navigation based on the index
     if (index == 0) {
@@ -198,6 +206,7 @@ class _ReportPageState extends State<ReportPage> {
     }
   }
 
+  // Variables to store selected date and time, and controllers for text fields
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   TextEditingController titleController = TextEditingController();
@@ -206,15 +215,18 @@ class _ReportPageState extends State<ReportPage> {
   TextEditingController descriptionController = TextEditingController();
   File? selectedImage; // Add this field to store the selected image.
 
+  // Lists for location and category suggestions
   List<String> locationSuggestions = [];
   List<String> categorySuggestions = [];
 
+  // Variables to manage focus and suggestion visibility
   bool isLocationFieldFocused = false;
   bool isCategoryFieldFocused = false;
 
   FocusNode locationFocusNode = FocusNode();
   FocusNode categoryFocusNode = FocusNode();
 
+  // Function to get location suggestions based on user input
   void getLocationSuggestions(String query) {
     setState(() {
       locationSuggestions = [
@@ -230,7 +242,7 @@ class _ReportPageState extends State<ReportPage> {
           .toList();
     });
   }
-
+  // Function to get category suggestions based on user input
   void getCategorySuggestions(String query) {
     setState(() {
       categorySuggestions = [
@@ -245,6 +257,7 @@ class _ReportPageState extends State<ReportPage> {
     });
   }
 
+  // Function to select a date from a date picker
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -258,6 +271,7 @@ class _ReportPageState extends State<ReportPage> {
       });
   }
 
+  // Function to select a time from a time picker
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -272,6 +286,7 @@ class _ReportPageState extends State<ReportPage> {
   // Define a variable to store the current word count
   int currentWordCount = 0;
 
+  // Function to count words in the description and limit the word count
   int countWords(String text) {
     if (text.isEmpty) {
       return 0;

@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fyptest1/report_page.dart';
 
-
+// Model class to represent a report with various properties
 class ReportModel {
+  // Properties of a report
   String? title;
   String? desc;
   String? location;
@@ -18,6 +19,7 @@ class ReportModel {
   String? emergencyStatus;
   String? formattedDate;
 
+  // Constructor for creating a ReportModel instance
   ReportModel({
     this.title,
     this.desc,
@@ -33,6 +35,7 @@ class ReportModel {
     this.time,
   });
 
+  // Method to convert ReportModel instance to a map for Firestore storage
   Map<String, dynamic> toMap() {
     return {
       'date': date,
@@ -48,9 +51,11 @@ class ReportModel {
       'emergencyStatus' : emergencyStatus
     };
   }
-
+  // Factory method to create a ReportModel instance from a Firestore snapshot
   factory ReportModel.fromSnapshot(DocumentSnapshot snapshot) {
+    // Extract data from the snapshot
     final data = snapshot.data() as Map<String, dynamic>;
+    // Create a ReportModel instance with the extracted data
     return ReportModel(
       date: data['date'],
       time: data['time'],

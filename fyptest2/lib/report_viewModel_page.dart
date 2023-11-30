@@ -6,11 +6,13 @@ import 'package:fyptest1/report_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;  // Add this import for HTTP requests
 
-
+// ViewModel class responsible for report-related operations
 class ReportViewModel extends ChangeNotifier {
 
+  // Create an instance of ReportModel to store report details
   ReportModel reportModel = ReportModel(date: null, time: null, imageUrls: []);
 
+  // Function to submit a report to both a custom server and Firestore
   Future<void> submitReport(
     ReportModel report,
     BuildContext context,
@@ -32,6 +34,7 @@ class ReportViewModel extends ChangeNotifier {
           report.userId == null ||
           report.imageUrls == null ||
           report.imageUrls?.isEmpty == true) {
+        // Show an alert if any details are missing
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -51,10 +54,11 @@ class ReportViewModel extends ChangeNotifier {
         );
         return;
       }
-
+      // Define the URL for the  server
       final url = Uri.parse('http://192.168.100.8:3001/submitReport'); //192.168.100.8, 192.168.218.106
 
       try {
+        // Send an HTTP POST request to the  server
         final response = await http.post(
           url,
           headers: {'Content-Type': 'application/json'},
@@ -122,6 +126,7 @@ class ReportViewModel extends ChangeNotifier {
     }
   }
 
+  // Function to upload an image from the device camera
   Future<XFile?> uploadImage() async {
     ImagePicker imagePicker = ImagePicker();
     XFile? selectedImage =

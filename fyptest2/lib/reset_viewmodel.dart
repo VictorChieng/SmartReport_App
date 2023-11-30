@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ViewModel class responsible for handling password reset
 class ResetViewModel {
+  // Function to reset the password for the provided email
   Future<void> resetPassword(String email, BuildContext context) async {
     try {
+      // Send a password reset email using FirebaseAuth
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      // Show success dialog
+      // Show success dialog upon successful password reset request
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -26,7 +29,7 @@ class ResetViewModel {
       );
     } catch (error) {
       print('Error resetting password: $error');
-      // Show error dialog - an error occurred
+      // Show an error dialog if an error occurs during the password reset process
       showDialog(
         context: context,
         builder: (BuildContext context) {

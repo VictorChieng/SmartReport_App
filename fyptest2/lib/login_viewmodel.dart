@@ -4,36 +4,36 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:fyptest1/home_page.dart';
 import 'dart:convert';
-
 import 'login_model.dart';
 
 class LoginViewModel extends ChangeNotifier {
+  // Model to manage the state of login data
   LoginModel loginModel = LoginModel(email: '', password: '');
 
+  // Firebase authentication instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  // Firebase Firestore instance
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  // Update the email in the login model
   void updateEmail(String value) {
     loginModel.email = value;
     notifyListeners();
   }
 
+  // Update the password in the login model
   void updatePassword(String value) {
     loginModel.password = value;
     notifyListeners();
   }
 
-  String hashPassword(String password) {
-    var bytes = utf8.encode(password); // Convert password to bytes
-    var hashed = sha256.convert(bytes); // Hash the bytes using SHA-256
-    return hashed.toString();
-  }
-
+  // Perform login with Firebase authentication
   Future<void> login(BuildContext context) async {
     try {
       String email = loginModel.email.trim();
       String password = loginModel.password.trim();
 
+      // Check if email and password are not empty
       if (email.isEmpty || password.isEmpty) {
         showDialog(
           context: context,
@@ -55,6 +55,7 @@ class LoginViewModel extends ChangeNotifier {
         return;
       }
 
+      // Attempt to sign in with email and password
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
@@ -66,7 +67,7 @@ class LoginViewModel extends ChangeNotifier {
         loginModel.email = "";
         loginModel.password = "";
 
-        // Successfully logged in
+        // Successfully logged in, navigate to the home page
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -96,7 +97,7 @@ class LoginViewModel extends ChangeNotifier {
           },
         );
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {// Handle specific FirebaseAuthException errors
       if (e.code == 'wrong-password') {
         // Incorrect password
         showDialog(

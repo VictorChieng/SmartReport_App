@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fyptest1/login_page_view.dart';
-import 'package:fyptest1/personaldetails_page.dart';
 import 'changepassword_page.dart';
 
+// SettingPage StatefulWidget class
 class SettingPage extends StatefulWidget {
   final String userId;
 
@@ -12,7 +12,7 @@ class SettingPage extends StatefulWidget {
   @override
   _SettingPageState createState() => _SettingPageState();
 }
-
+// Function to handle the logout process
 void LogOut(BuildContext context) async {
   await FirebaseAuth.instance.signOut();
   Navigator.pop(context);
