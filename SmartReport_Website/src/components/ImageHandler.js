@@ -18,9 +18,8 @@ function ImageHandler({ userId }) {
     imageFileInput.onchange = async (event) => {
       const imageFile = event.target.files[0];
 
-      // You can display the selected image for confirmation here
 
-      // Implement your confirmation logic here
+      // Implement confirmation logic 
 
       if (imageFile) {
         // Once confirmed, upload the image to Firebase Storage

@@ -89,6 +89,7 @@ function AReportAssign() {
   // Function to handle saving comments
   const handleSaveComment = async () => {
     try {
+      // Sanitize comment text by removing HTML tags
       const commentText = commentContent.replace(/<\/?[^>]+(>|$)/g, '');
 
       // Update Firestore document with the new comment using merge: true
@@ -212,8 +213,8 @@ function AReportAssign() {
       );
       const dataToSend = {
         reportId,
-        // Add other data properties as needed
     };
+    // Send a POST request to the server endpoint with the provided data using Axios
     await axios.post('http://localhost:3001/completed-report-agent', dataToSend);
     confirmAlert({
       title: 'Success',

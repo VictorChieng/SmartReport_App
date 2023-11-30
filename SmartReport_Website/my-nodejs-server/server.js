@@ -9,7 +9,7 @@ const functions = require('firebase-functions');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://console.firebase.google.com/u/0/project/smartreport-272fa/database/smartreport-272fa-default-rtdb/data/~2F', // Replace with your Firebase database URL
+  databaseURL: 'https://console.firebase.google.com/u/0/project/smartreport-272fa/database/smartreport-272fa-default-rtdb/data/~2F', //  Firebase database URL
 });
 
 // Configure Nodemailer with Gmail app-specific password

@@ -29,7 +29,7 @@ function Report2() {
   const [reportData, setReportData] = useState([]);
 
   useEffect(() => {
-    // Initialize Firestore directly in your component.
+    // Initialize Firestore directly in  component.
     const db = firebase.firestore();
 
     // Fetch counts for different report statuses.

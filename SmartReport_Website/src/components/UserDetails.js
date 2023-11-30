@@ -70,10 +70,10 @@ function UserDetails() {
                 })
                 .catch((error) => {
                     const confirmError = window.confirm('Error removing user. Click OK to dismiss.');
-                    // You can choose to handle the error in different ways or navigate back if desired
+                    
                 });
 
-            // Next, send a request to your server to perform any additional actions (e.g., cleanup) if needed
+            // Next, send a request to  server to perform any additional actions 
             axios.post('http://localhost:3001/removeUser', {
                 uid: userId,
             })
@@ -85,12 +85,10 @@ function UserDetails() {
                     }
                 } else {
                     const confirmError = window.confirm('Error removing user from the server. Click OK to dismiss.');
-                    // You can choose to handle the error in different ways or navigate back if desired
                 }
             })
             .catch((error) => {
                 const confirmError = window.confirm('Error sending request to the server. Click OK to dismiss.');
-                // You can choose to handle the error in different ways or navigate back if desired
             });
         }
     };

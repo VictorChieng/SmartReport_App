@@ -8,10 +8,12 @@ import "./report.css";
 import { Link } from "react-router-dom";
   
 function AReport5() {
+  // State variables for storing report data, search query, and emergency reports count
   const [reportSubmissions, setReportSubmissions] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [emergencyReportsCount, setEmergencyReportsCount] = useState(0);
 
+  // Function to fetch data from Firestore based on the current user's ID
   async function fetchDataFromFirestore(currentUserUid) {
     const collectionRef = firestore().collection("report_submissions");
     const snapshot = await collectionRef
@@ -21,6 +23,7 @@ function AReport5() {
     const data = [];
     let count = 0;
 
+    // Iterate through the Firestore snapshot and filter relevant data
     snapshot.forEach((doc) => {
       const reportData = doc.data();
       const isUserAssigned = reportData.agentAssign.some(
@@ -36,10 +39,11 @@ function AReport5() {
       }
     });
 
+    // Update state with the filtered report data and emergency reports count
     setReportSubmissions(data);
     setEmergencyReportsCount(count);
   }
-
+  // Effect hook to trigger data fetching when the component mounts
   useEffect(() => {
     const auth = firebase.auth();
 
@@ -53,6 +57,7 @@ function AReport5() {
     });
   }, []);
 
+  // Filter reports based on the search query
   const filteredReports = reportSubmissions.filter((report) =>
     report.reportId.includes(searchQuery)
   );

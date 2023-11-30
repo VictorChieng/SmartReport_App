@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { UserProvider } from './components/UserContext'; // Import the UserProvider from your UserContext
+import { UserProvider } from './components/UserContext'; // Import the UserProvider from  UserContext
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider> {/* Wrap your entire app with the UserProvider */}
+    <UserProvider> {/* Wrap  entire app with the UserProvider */}
       <App />
     </UserProvider>
   </React.StrictMode>,
@@ -15,14 +15,3 @@ ReactDOM.render(
 );
 
 
-// import React from "react"
-// import ReactDOM from "react-dom"
-// import App from "./components/App"
-// import "bootstrap/dist/css/bootstrap.min.css"
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById("root")
-// )

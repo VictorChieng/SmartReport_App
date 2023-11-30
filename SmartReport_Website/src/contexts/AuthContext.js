@@ -61,27 +61,3 @@ export function AuthProvider({ children }) {
   )
 }
 
-// async function signup(email, password, role, name, phoneNumber, department) {
-//   try {
-//     // Create a new user using the Firebase Admin SDK
-//     const userRecord = await createUser({
-//       email: email,
-//       emailVerified: false,
-//       phoneNumber: phoneNumber,
-//       password: password,
-//       displayName: name,
-//       disabled: false,
-//     });
-
-//     const userId = userRecord.uid;
-
-//     // After successful user creation, you can save additional user data
-//     // to Firestore or your preferred database.
-
-//     // Return the user's UID for further reference, if needed.
-//     return userId;
-//   } catch (error) {
-//     // Handle the error if user creation fails
-//     throw error;
-//   }
-// }
